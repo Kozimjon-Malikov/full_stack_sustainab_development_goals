@@ -1,0 +1,298 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <!--====== Title ======-->
+    <title>SDG - 17ta dunyoni o'zgartirishga yo'naltirilgan Barqaror Rivojlanish Maqsadlari</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--====== Favicon Icon ======-->
+    <link rel="shortcut icon" href="{{ asset('frontend/assets/images/meta-logo.png') }}" type="image/png">
+    <!--===== Vendor CSS (Bootstrap & Icon Font) =====-->
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/plugins/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/plugins/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/plugins/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/plugins/default.css') }}">
+    <!--===== Plugins CSS (All Plugins Files) =====-->
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/plugins/animate.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/plugins/swiper-bundle.min.css') }}">
+    <!--====== Main Style CSS ======-->
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/preloader.min.css') }}">
+</head>
+
+<body style="background-color: #f3f4f4;">
+    @include('frontend.components.header')
+    @yield('content')
+    @include('frontend.components.footer')
+    <!--====== BACK TOP TOP PART START ======-->
+    <a href="#" class="back-to-top"><i class="fal fa-chevron-up"></i></a>
+    <!--====== BACK TOP TOP PART ENDS ======-->
+
+    <!--====== Jquery js ======-->
+    <script src="{{ asset('frontend/assets/js/vendor/jquery-3.5.1.min.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/vendor/modernizr-3.7.1.min.js') }}"></script>
+
+    <!--====== All Plugins js ======-->
+    <script src="{{ asset('frontend/assets/js/plugins/popper.min.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/plugins/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/plugins/swiper-bundle.min.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/plugins/jquery.easing.min.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/plugins/scrolling-nav.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/plugins/wow.min.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/plugins/tilt.jquery.js') }}"></script>
+
+    <!--====== Main Activation  js ======-->
+    <script src="{{ asset('frontend/assets/js/main.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/language.js') }}"></script>
+    <script>
+        $(function() {
+
+            "use strict";
+
+            /*=============================================
+            =                Prealoder                  =
+            =============================================*/
+
+            if ($('.preloader').length) {
+                $('.preloader').fadeOut();
+            }
+
+            /*=====  End of Prealoder  ======*/
+
+
+            /*=============================================
+            =                   Sticky                   =
+            =============================================*/
+
+            $(window).on('scroll', function(event) {
+                var scroll = $(window).scrollTop();
+                if (scroll < 50) {
+                    $(".header-area").removeClass("sticky");
+                    $(".navbar-2 img").attr("src", "{{ asset('frontend/assets/images/logo1.png') }}");
+                } else {
+                    $(".header-area").addClass("sticky");
+                    $(".navbar-2 img").attr("src", "{{ asset('frontend/assets/images/logo.png') }}");
+                }
+            });
+
+            /*=====  End of Sticky  ======*/
+
+
+            /*=============================================
+            =                Mobile Menu                  =
+            =============================================*/
+
+            $(".navbar-nav a").on('click', function() {
+                $(".navbar-collapse").removeClass("show");
+            });
+
+            $(".navbar-toggler").on('click', function() {
+                $(this).toggleClass("active");
+            });
+
+            $(".navbar-nav a").on('click', function() {
+                $(".navbar-toggler").removeClass('active');
+            });
+
+
+            var subMenu = $('.sub-menu-bar .navbar-nav .sub-menu');
+
+            if (subMenu.length) {
+                subMenu.parent('li').children('a').append(function() {
+                    return '<button class="sub-nav-toggler"> <span></span> </button>';
+                });
+
+                var subMenuToggler = $('.sub-menu-bar .navbar-nav .sub-nav-toggler');
+
+                subMenuToggler.on('click', function() {
+                    $(this).parent().parent().children('.sub-menu').slideToggle();
+                    return false
+                });
+
+            }
+
+            /*=====  End of Mobile Menu  ======*/
+
+            /*=============================================
+            =            Section Menu Active              =
+            =============================================*/
+
+            var scrollLink = $('.page-scroll');
+            // Active link switching
+            $(window).scroll(function() {
+                var scrollbarLocation = $(this).scrollTop();
+
+                scrollLink.each(function() {
+
+                    var sectionOffset = $(this.hash).offset().top - 73;
+
+                    if (sectionOffset <= scrollbarLocation) {
+                        $(this).parent().addClass('active');
+                        $(this).parent().siblings().removeClass('active');
+                    }
+                });
+            });
+
+            /*=====  End of Section Menu Active  ======*/
+
+
+            /*=============================================
+            =           Testimonial Active                =
+            =============================================*/
+
+            var swiper = new Swiper('.testimonial-active', {
+                slidesPerView: 'auto',
+                autoplay: {
+                    delay: 3000,
+                },
+                spaceBetween: 0,
+                speed: 800,
+            });
+
+            /*=====  End of Testimonial Active ======*/
+
+
+            /*=============================================
+            =             Screenshot ACtive               =
+            =============================================*/
+
+            var swiper = new Swiper('.screenshot-active', {
+                slidesPerView: 5,
+                autoplay: {
+                    delay: 3000,
+                },
+                loop: true,
+                spaceBetween: 30,
+                speed: 800,
+                pagination: {
+                    el: '.screenshot-pagination',
+                    clickable: true,
+                },
+                breakpoints: {
+                    0: {
+                        slidesPerView: 1,
+                    },
+                    576: {
+                        slidesPerView: 1,
+                    },
+                    768: {
+                        slidesPerView: 2,
+                    },
+                    992: {
+                        slidesPerView: 2,
+                    },
+                    1200: {
+                        slidesPerView: 3,
+                    },
+                }
+            });
+
+            /*=====  End of Screenshot ACtive ======*/
+
+
+            /*=============================================
+            =               Brand ACtive                  =
+            =============================================*/
+
+            var swiper = new Swiper('.brand-active', {
+                slidesPerView: 5,
+                autoplay: {
+                    delay: 4000,
+                },
+                loop: true,
+                spaceBetween: 30,
+                speed: 800,
+                breakpoints: {
+                    0: {
+                        slidesPerView: 2,
+                    },
+                    576: {
+                        slidesPerView: 4,
+                    },
+                    768: {
+                        slidesPerView: 4,
+                    },
+                    992: {
+                        slidesPerView: 4,
+                    },
+                    1200: {
+                        slidesPerView: 5,
+                    },
+                }
+            });
+
+            /*=====  End of Screenshot ACtive ======*/
+
+
+            /*=============================================
+            =                WOW active                   =
+            =============================================*/
+
+            var wow = new WOW({
+                boxClass: 'wow', //
+                mobile: false, // 
+            })
+            wow.init();
+
+            /*=====  End of WOW active ======*/
+
+
+            /*=============================================
+            =                Back to top                  =
+            =============================================*/
+
+            // Show or hide the sticky footer button
+            $(window).on('scroll', function(event) {
+                if ($(this).scrollTop() > 600) {
+                    $('.back-to-top').fadeIn(200)
+                } else {
+                    $('.back-to-top').fadeOut(200)
+                }
+            });
+
+
+            //Animate the scroll to yop
+            $('.back-to-top').on('click', function(event) {
+                event.preventDefault();
+
+                $('html, body').animate({
+                    scrollTop: 0,
+                }, 1500);
+            });
+
+            /*=====  End of Back to top ======*/
+
+
+        });
+
+
+        // loader
+        document.addEventListener('DOMContentLoaded', () => {
+            var preloader = document.getElementById("preloader");
+            if (preloader) {
+                var siteContent = document.getElementById("siteContent");
+                preloader.className += "loading";
+                setTimeout(function() {
+                    preloader.className += " loaded";
+                    setTimeout(function() {
+                        if (document.getElementById("main")) {
+                            document.getElementById("main").className += " insight";
+                        }
+                    }, 100);
+                    setTimeout(function() {
+                        if (siteContent) {
+                            siteContent.className -= "fixed";
+                        }
+                        preloader.className -= "loading";
+                        preloader.style.display = "none";
+                    }, 1000);
+                }, 850);
+            }
+        })
+        // loader ends
+    </script>
+</body>
+
+</html>
